@@ -4,6 +4,8 @@ from erpnext.projects.doctype.task.task import *
 import frappe
 from frappe import _
 class CustomTask(Task):
+	def validate(self):
+		frappe.throw("test")
 	@frappe.whitelist()
 	def get_assigment_status(self):
 			status=False
