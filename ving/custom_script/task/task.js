@@ -6,6 +6,9 @@ frappe.ui.form.on('Task', {
 			callback: function (r) {
 				if (r) {
 					console.log(r.message)
+					if (r.message){
+						$(".add-assignment-btn").css("display", "none");
+					}
 				}
 			}
 		});
