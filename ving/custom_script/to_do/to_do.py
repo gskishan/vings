@@ -1,7 +1,7 @@
 import frappe
 @frappe.whitelist()
 def validate(self,method):
-	if self.reference=="Task":
+	if self.reference_type=="Task":
 		sql="""select * from `tabTask Depends On` where parent="{0}" """.format(self.reference_name)
 		for d in frappe.db.sql(sql, as_dict=True):
 			create_todo(d.subject,"Task",d.task,self)
