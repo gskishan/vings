@@ -11,6 +11,7 @@ def validate(self,method):
 def create_todo(description, reference_type, reference_name,self):
 	todo = frappe.new_doc("ToDo")
 	todo.description = description
+	todo.allocated_to = self.allocated_to
 	todo.date = self.date
 	todo.priority =self.priority
 	todo.assigned_by = self.assigned_by
