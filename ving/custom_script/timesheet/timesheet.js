@@ -11,14 +11,15 @@ frappe.ui.form.on('Timesheet Detail', {
 	to_time: function (frm, cdt, cdn) {
 		var d = locals[cdt][cdn];
 		if (d.to_time){
-		    cur_frm.set_value("custom_to_day",(getDayOfWeek(d.to_time)))
+			frappe.model.set_value(d.doctype, child.name, "custom_to_day",)(getDayOfWeek(d.to_time))
+			
 		    
 		}
 	},
 	from_time: function (frm, cdt, cdn) {
 		var d = locals[cdt][cdn];
 		if (d.from_time){
-		    cur_frm.set_value("custom_from_day",(getDayOfWeek(d.from_time)))
+			frappe.model.set_value(d.doctype, child.name, "custom_from_day",)(getDayOfWeek(d.from_time))
 		    
 		}
 	}
