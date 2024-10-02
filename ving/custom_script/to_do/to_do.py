@@ -4,8 +4,8 @@ def validate(self,method):
 	if self.reference_type=="Task":
 		sql="""select * from `tabTask Depends On` where parent="{0}" """.format(self.reference_name)
 		for d in frappe.db.sql(sql, as_dict=True):
-			if check_todo_exists(d,self):
-				create_todo(d.subject,"Task",d.task,self)
+			# if check_todo_exists(d,self):
+			create_todo(d.subject,"Task",d.task,self)
 
 
 
