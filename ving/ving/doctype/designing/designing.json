@@ -1,0 +1,151 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "Designing-.#####",
+ "creation": "2024-10-28 20:02:31.129596",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "designer",
+  "designer_name",
+  "posting_date",
+  "column_break_xhhi",
+  "opportunity_id",
+  "project",
+  "designing_status",
+  "section_break_iz16",
+  "equipment",
+  "section_break_8p4i",
+  "odu_combination_1",
+  "column_break_mqag",
+  "odu_combination_2",
+  "section_break_fbml",
+  "bill_of_quantity",
+  "designing_low_side",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_iz16",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Designing",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "opportunity_id",
+   "fieldtype": "Link",
+   "label": "Opportunity ID",
+   "options": "Opportunity"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "column_break_xhhi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "designer",
+   "fieldtype": "Link",
+   "label": "Designer",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "designer.employee",
+   "fieldname": "designer_name",
+   "fieldtype": "Data",
+   "label": "Designer Name",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "designing_status",
+   "fieldtype": "Select",
+   "label": "Designing Status",
+   "options": "Open\nCompleted\nHold\nClose\nCancelled"
+  },
+  {
+   "fieldname": "bill_of_quantity",
+   "fieldtype": "Table",
+   "label": "Bill of Quantity",
+   "options": "Designing Bill of Quantity"
+  },
+  {
+   "fieldname": "equipment",
+   "fieldtype": "Table",
+   "label": "UP SIDE  (HVAC COOLING LOAD / EQUIPMENT PROPOSED)",
+   "options": "Designing equipment"
+  },
+  {
+   "fieldname": "designing_low_side",
+   "fieldtype": "Table",
+   "label": "Low\u00a0Side\u00a0(Installation,\u00a0Testing\u00a0&\u00a0Commissioning)",
+   "options": "Designing Low Side"
+  },
+  {
+   "fieldname": "section_break_8p4i",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "odu_combination_1",
+   "fieldtype": "Data",
+   "label": "ODU Combination 1"
+  },
+  {
+   "fieldname": "odu_combination_2",
+   "fieldtype": "Data",
+   "label": "ODU Combination 2"
+  },
+  {
+   "fieldname": "section_break_fbml",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_mqag",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-10-28 20:54:20.327782",
+ "modified_by": "Administrator",
+ "module": "Ving",
+ "name": "Designing",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
