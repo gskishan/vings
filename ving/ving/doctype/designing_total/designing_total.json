@@ -1,0 +1,102 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-11-06 23:28:00.367485",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "floor",
+  "total_capacity_index",
+  "total_tr",
+  "total_hp",
+  "total_qty",
+  "hp",
+  "odu_capacity",
+  "diversity",
+  "max_capacity",
+  "odu_combination__1",
+  "odu_combination__2"
+ ],
+ "fields": [
+  {
+   "fieldname": "floor",
+   "fieldtype": "Link",
+   "label": "Floor",
+   "options": "Floor",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_capacity_index",
+   "fieldtype": "Float",
+   "label": "Total Capacity Index",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_tr",
+   "fieldtype": "Float",
+   "label": "Total TR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_hp",
+   "fieldtype": "Float",
+   "label": "Total HP",
+   "read_only": 1
+  },
+  {
+   "fieldname": "hp",
+   "fieldtype": "Float",
+   "label": "HP",
+   "read_only": 1
+  },
+  {
+   "fieldname": "odu_capacity",
+   "fieldtype": "Float",
+   "label": "ODU Capacity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "diversity",
+   "fieldtype": "Float",
+   "label": "Diversity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "max_capacity",
+   "fieldtype": "Float",
+   "label": "Max Capacity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "odu_combination__1",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "ODU Combination  1"
+  },
+  {
+   "fieldname": "odu_combination__2",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "ODU Combination  2"
+  },
+  {
+   "fieldname": "total_qty",
+   "fieldtype": "Float",
+   "label": "Total Qty",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-11-07 12:19:20.575025",
+ "modified_by": "Administrator",
+ "module": "Ving",
+ "name": "Designing total",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -15,11 +15,8 @@
   "designing_status",
   "section_break_iz16",
   "equipment",
+  "designing_total",
   "section_break_8p4i",
-  "odu_combination_1",
-  "column_break_mqag",
-  "odu_combination_2",
-  "section_break_fbml",
   "bill_of_quantity",
   "designing_low_side",
   "amended_from"
@@ -103,28 +100,16 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "odu_combination_1",
-   "fieldtype": "Data",
-   "label": "ODU Combination 1"
-  },
-  {
-   "fieldname": "odu_combination_2",
-   "fieldtype": "Data",
-   "label": "ODU Combination 2"
-  },
-  {
-   "fieldname": "section_break_fbml",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "column_break_mqag",
-   "fieldtype": "Column Break"
+   "fieldname": "designing_total",
+   "fieldtype": "Table",
+   "label": "Designing total",
+   "options": "Designing total"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-28 20:54:20.327782",
+ "modified": "2024-11-07 12:21:51.146221",
  "modified_by": "Administrator",
  "module": "Ving",
  "name": "Designing",
