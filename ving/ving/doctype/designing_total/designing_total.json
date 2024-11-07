@@ -65,8 +65,8 @@
   {
    "fieldname": "max_capacity",
    "fieldtype": "Float",
-   "label": "Max Capacity",
-   "read_only": 1
+   "in_list_view": 1,
+   "label": "Max Capacity"
   },
   {
    "fieldname": "odu_combination__1",
@@ -90,7 +90,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-11-07 12:19:20.575025",
+ "modified": "2024-11-07 20:21:58.097701",
  "modified_by": "Administrator",
  "module": "Ving",
  "name": "Designing total",

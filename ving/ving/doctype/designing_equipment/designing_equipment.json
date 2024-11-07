@@ -43,7 +43,6 @@
   {
    "fieldname": "item_code",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Item code",
    "options": "Item"
   },
@@ -51,29 +50,34 @@
    "fetch_from": "item_code.item_name",
    "fieldname": "equipment_description",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "Equipment Description"
   },
   {
    "fetch_from": "item_code.custom_capacity_index",
+   "fetch_if_empty": 1,
    "fieldname": "capacity",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Capacity"
   },
   {
    "fetch_from": "item_code.custom_tr",
+   "fetch_if_empty": 1,
    "fieldname": "tr",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "TR"
   },
   {
    "fieldname": "qty",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Quantity"
   },
   {
    "fieldname": "total_tr",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Total TR",
    "read_only": 1
   },
@@ -88,7 +92,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-10-28 23:01:53.711062",
+ "modified": "2024-11-07 19:52:25.979223",
  "modified_by": "Administrator",
  "module": "Ving",
  "name": "Designing equipment",

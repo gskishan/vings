@@ -4,7 +4,21 @@
 frappe.ui.form.on("Designing", {
     refresh(frm) {
 
+        $('[data-fieldname="insert_total"]button').css("background-color", "#2490ef")
+		$('[data-fieldname="insert_total"]button').css("color", "white")
     },
+    insert_total:function(frm){
+        console.log("yes")
+        frappe.call({
+            doc: cur_frm.doc,
+            method: "get_totals",
+            callback: function (r) {
+                console.log(r.message,"1")
+                cur_frm.refresh_fields()
+
+            }
+        });
+    }
 
 });
 frappe.ui.form.on("Designing equipment", {
@@ -48,7 +62,8 @@ frappe.ui.form.on("Designing equipment", {
             row.area = row.length * row.width
         }
         cur_frm.refresh_fields()
-    }
+    },
+    
 
 
 

@@ -8,11 +8,26 @@ from collections import defaultdict
 class Designing(Document):
 	def validate(self):
 		self.fill_bill()
-		self.get_totals()
+		# self.get_totals()
+		self.calculate_final()
+
+
+	def calculate_final(self):
+		if not self.designing_total:
+			frappe.throw("Designing Total Is Mandatory")
+		for d in self.designing_total:
+
+			if not  d.max_capacity:
+				frappe.throw("Max Capacity missing in row {}".format(d.idx))
+			if d.max_capacity <= 0:
+				frappe.throw("Max Capacity cant be equal or less then 0  in row {}".format(d.idx))
+			else:
+				d.odu_capacity=d.max_capacity*25
+				d.diversity =d.total_capacity_index/d.odu_capacity
 
 
 
-
+	@frappe.whitelist()
 	def get_totals(self):
 		floor_totals = defaultdict(lambda: {"capacity": 0, "qty": 0, "total_tr": 0, "tr": 0})
 
@@ -32,17 +47,10 @@ class Designing(Document):
 			row.floor=floor
 			row.total_capacity_index=totals['capacity']
 			row.total_tr=totals['total_tr']
-			# row.total_hp=totals['total_hp']  #need to add
+			row.total_hp= row.total_capacity_index/2
 			row.total_qty=totals['qty']  
-			row.hp=totals['hp']
-			# row.odu_capacity=totalsd
-
-
-			# print(f"Floor: {floor}")
-			# print(f"  Total Capacity: {totals['capacity']}")
-			# print(f"  Total Quantity: {totals['qty']}")
-			# print(f"  Total TR: {totals['tr']}")
-			# print(f"  Total Total_TR: {totals['total_tr']}")
+			row.hp=row.total_hp*1.25
+			
 
 
 	def fill_bill(self):
