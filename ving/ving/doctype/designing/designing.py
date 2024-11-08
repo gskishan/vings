@@ -32,11 +32,13 @@ class Designing(Document):
 		floor_totals = defaultdict(lambda: {"capacity": 0, "qty": 0, "total_tr": 0, "tr": 0})
 
 		for item in self.equipment:
+			item.tr = float(item.get("tr", 0))
+			item.capacity = float(item.get("capacity", 0))
 			floor = item.get("floor")
 			floor_totals[floor]["capacity"] += item.get("capacity", 0)
 			floor_totals[floor]["qty"] += item.get("qty", 0)
 			floor_totals[floor]["tr"] += item.get("tr", 0)
-			floor_totals[floor]["total_tr"] += item.get("total_tr", 0)
+			floor_totals[floor]["total_tr"] += float(item.get("total_tr", 0))
 
 
 		self.designing_total=[]
