@@ -6,6 +6,14 @@ frappe.ui.form.on("Designing", {
 
         $('[data-fieldname="insert_total"]button').css("background-color", "#2490ef")
 		$('[data-fieldname="insert_total"]button').css("color", "white")
+
+
+        frm.add_custom_button("Create Quotation", function () {
+            frappe.new_doc('Quotation', {
+                
+                designing:cur_frm.doc.name,
+              });
+        });
     },
     insert_total:function(frm){
         console.log("yes")

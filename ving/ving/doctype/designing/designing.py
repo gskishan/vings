@@ -106,3 +106,5 @@ def get_item_price(item_code, price_list):
         return price_data.price_list_rate
     else:
         frappe.msgprint(f"Price not found for item {item_code} in price list {price_list}.")
+
+

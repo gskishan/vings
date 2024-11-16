@@ -31,6 +31,7 @@ app_license = "mit"
 doctype_js = {
     "Task" : "custom_script/task/task.js",
     "Timesheet" : "custom_script/timesheet/timesheet.js",
+    "Quotation" : "custom_script/quotation/quotation.js",
 }
 
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
@@ -119,7 +120,8 @@ doctype_js = {
 # Override standard doctype classes
 
 override_doctype_class = {
-"Task":"ving.custom_script.task.task.CustomTask"
+"Task":"ving.custom_script.task.task.CustomTask",
+"Quotation":"ving.custom_script.quotation.quotation.CustomQuotation"
 }
 
 # Document Events
