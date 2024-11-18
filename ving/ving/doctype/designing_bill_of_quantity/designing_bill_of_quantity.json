@@ -23,9 +23,9 @@
   },
   {
    "fetch_from": "item_code.item_name",
-   "fieldname": "description",
+   "fieldname": "item_name",
    "fieldtype": "Data",
-   "label": "Description",
+   "label": "Item Name",
    "read_only": 1
   },
   {
