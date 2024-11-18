@@ -46,7 +46,7 @@ class CustomQuotation(Quotation):
             for f in doc.bill_of_quantity:
                 row=self.append("items",{})
                 row.item_code=f.item_code
-                row.item_name=f.item_name
+                row.item_name=f.item_code
                 row.qty=f.quantity
                 row.uom=f.unit
                 row.rate=f.rate
@@ -55,6 +55,7 @@ class CustomQuotation(Quotation):
             for l in doc.designing_low_side:
                 row=self.append("items",{})
                 row.item_code=l.item_code
+                row.item_name=l.item_code
                 row.qty=l.quantity
                 row.uom=l.unit
                 row.rate=l.rate
