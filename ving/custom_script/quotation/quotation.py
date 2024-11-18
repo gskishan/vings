@@ -46,7 +46,7 @@ class CustomQuotation(Quotation):
             for f in doc.bill_of_quantity:
                 row=self.append("items",{})
                 row.item_code=f.item_code
-                row.description=f.description
+                row.item_name=f.item_name
                 row.qty=f.quantity
                 row.uom=f.unit
                 row.rate=f.rate
