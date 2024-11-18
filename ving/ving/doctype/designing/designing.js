@@ -8,13 +8,13 @@ frappe.ui.form.on("Designing", {
 		$('[data-fieldname="insert_total"]button').css("color", "white")
 
 
+	if (cur_frm.doc.docstatus==1){
         frm.add_custom_button("Create Quotation", function () {
-		if (cur_frm.doc.docstatus==1){
 		    frappe.new_doc('Quotation', {
 			designing:cur_frm.doc.name,
 		      });
-		}
         });
+	}
     },
     insert_total:function(frm){
         console.log("yes")
