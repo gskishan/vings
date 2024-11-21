@@ -109,6 +109,7 @@ def get_item_price(item_code, price_list):
 		frappe.throw("Item code and price list are required.")
 
 	price_data = get_item_details(args)
+	frappe.errprint(price_data)
 
 	if price_data:
 		return price_data.price_list_rate
