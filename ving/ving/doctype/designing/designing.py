@@ -109,7 +109,9 @@ def get_item_price(item_code, price_list):
 		"selling_price_list": price_list,  
 		"conversion_rate": 1.0,                
 		"doctype": "Sales Order",              
-		 "transaction_date": datetime.today().strftime('%Y-%m-%d'),      
+		 "transaction_date": datetime.today().strftime('%Y-%m-%d'),
+		"company":frappe.defaults.get_user_default("Company"),
+
 	}
 
    
