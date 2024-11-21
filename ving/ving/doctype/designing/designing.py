@@ -112,7 +112,7 @@ def get_item_price(item_code, price_list):
 		"doctype": "Sales Order",              
 		 "transaction_date": datetime.today().strftime('%Y-%m-%d'),
 		"company":frappe.defaults.get_user_default("Company"),
-		"customer":"Sri Krishna Agencies",
+		"customer":"test",
 	}
 
    
