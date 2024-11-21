@@ -47,7 +47,7 @@ class Designing(Document):
 			
 			row=self.append("designing_total",{})
 			row.floor=floor
-			row.total_capacity_index=totals['capacity']
+			row.total_capacity_index=totals['capacity']*totals['qty']  
 			row.total_tr=totals['total_tr']
 			row.total_hp= row.total_capacity_index/2
 			row.total_qty=totals['qty']  
@@ -91,20 +91,28 @@ class Designing(Document):
 
 
 def get_item_price(item_code, price_list):
+	from datetime import datetime
+	from erpnext.stock.get_item_details import get_item_details
+
+
+	args = {
+		"item_code":item_code ,              
+		"price_list_currency": "INR",          
+		"selling_price_list": price_list,  
+		"conversion_rate": 1.0,                
+		"doctype": "Sales Order",              
+		 "transaction_date": datetime.today().strftime('%Y-%m-%d'),      
+	}
+
    
-    if not item_code or not price_list:
-        frappe.throw("Item code and price list are required.")
+	if not item_code or not price_list:
+		frappe.throw("Item code and price list are required.")
 
-    price_data = frappe.db.get_value(
-        "Item Price",
-        {"item_code": item_code, "price_list": price_list},
-        ["price_list_rate"],
-        as_dict=True
-    )
+	price_data = get_item_details(args)
 
-    if price_data:
-        return price_data.price_list_rate
-    else:
-        frappe.msgprint(f"Price not found for item {item_code} in price list {price_list}.")
+	if price_data:
+		return price_data.price_list_rate
+	else:
+		frappe.msgprint(f"Price not found for item {item_code} in price list {price_list}.")
 
 
