@@ -10,7 +10,7 @@ class Designing(Document):
 		self.fill_bill()
 		# self.get_totals()
 		self.calculate_final()
-		self.designing_low_side()
+		self.calculate_low_side()
 
 
 	def calculate_final(self):
@@ -69,7 +69,7 @@ class Designing(Document):
 					row.amount=row.rate*row.quantity
 
 	@frappe.whitelist()
-	def designing_low_side(self):
+	def calculate_low_side(self):
 		for d in self.designing_low_side:
 			d.rate=get_item_price(d.get("item_code"),"Standard Selling")
 			d.amount=d.quantity*d.rate
