@@ -10,6 +10,7 @@ class Designing(Document):
 		self.fill_bill()
 		# self.get_totals()
 		self.calculate_final()
+		self.designing_low_side()
 
 
 	def calculate_final(self):
@@ -66,6 +67,13 @@ class Designing(Document):
 					row.unit=frappe.db.get_value('Item', d.get("item_code"), 'stock_uom')
 					row.rate=get_item_price(d.get("item_code"),"Standard Selling")
 					row.amount=row.rate*row.quantity
+
+	@frappe.whitelist()
+	def designing_low_side(self):
+		for d in self.designing_low_side:
+			d.rate=get_item_price(d.get("item_code"),"Standard Selling")
+			d.amount=d.quantity*d.rate
+
 				
 	def item_already_in(self,item):
 		status=False
@@ -115,5 +123,3 @@ def get_item_price(item_code, price_list):
 		return price_data.price_list_rate
 	else:
 		frappe.msgprint(f"Price not found for item {item_code} in price list {price_list}.")
-
-
