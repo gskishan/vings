@@ -72,7 +72,8 @@ class Designing(Document):
 	def calculate_low_side(self):
 		for d in self.designing_low_side:
 			d.rate=get_item_price(d.get("item_code"),"Standard Selling")
-			d.amount=d.quantity*d.rate
+			if d.rate and d.quantity:
+				d.amount=d.quantity*d.rate
 
 				
 	def item_already_in(self,item):
@@ -111,7 +112,7 @@ def get_item_price(item_code, price_list):
 		"doctype": "Sales Order",              
 		 "transaction_date": datetime.today().strftime('%Y-%m-%d'),
 		"company":frappe.defaults.get_user_default("Company"),
-
+		"customer":"Sri Krishna Agencies",
 	}
 
    
