@@ -122,7 +122,7 @@ doctype_js = {
 override_doctype_class = {
 "Task":"ving.custom_script.task.task.CustomTask",
 "Quotation":"ving.custom_script.quotation.quotation.CustomQuotation",
-    "Salary Slip": "ving.custom_script.salary_slip.CustomSalarySlip",
+    "Salary Slip": "ving.custom_script.salary_slip.salary_slip.CustomSalarySlip",
 
 }
 
