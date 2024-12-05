@@ -17,7 +17,7 @@ def on_trash(self,method=None):
     pass
 @frappe.whitelist()
 def validate(self,method=None):
-    item_row=checkif(self):
+    item_row=checkif(self)
     if item_row:
         item=frappe.get_doc("Item price summmary",item_row)
         item.rate=self.price_list_rate
