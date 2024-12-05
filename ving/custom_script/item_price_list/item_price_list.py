@@ -13,6 +13,9 @@ def update_all():
         method=None
         validate(self,method)
 @frappe.whitelist()
+def on_trash(self,method=None):
+    pass
+@frappe.whitelist()
 def validate(self,method=None):
     item_row=checkif(self):
     if item_row:
