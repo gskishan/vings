@@ -35,7 +35,7 @@ def validate(self,method=None):
             row.type="Selling"
         else:
             row.type="Buying"
-        imt.save()
+        itm.save()
 
 
 
