@@ -138,10 +138,10 @@ doc_events = {
   "ToDo":{
         "validate":"ving.custom_script.to_do.to_do.validate",
     },
-    "Item Price":{
-        "validate":"ving.custom_script.item_price_list.item_price_list.validate",
-         "on_trash":"ving.custom_script.item_price_list.item_price_list.on_trash",
-    },
+    # "Item Price":{
+    #     "validate":"ving.custom_script.item_price_list.item_price_list.validate",
+    #      "on_trash":"ving.custom_script.item_price_list.item_price_list.on_trash",
+    # },
    
 }
 # Scheduled Tasks
