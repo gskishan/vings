@@ -8,7 +8,8 @@
  "field_order": [
   "salary_component",
   "variable",
-  "type"
+  "type",
+  "skip_calculation"
  ],
  "fields": [
   {
@@ -35,12 +36,19 @@
    "label": "Type",
    "options": "\nNight Allowance\nFuel Allowance\nLoyalty Allowance\nPerformance Allowance",
    "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "skip_calculation",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Skip"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-12-20 12:47:03.544240",
+ "modified": "2024-12-20 13:06:49.223585",
  "modified_by": "Administrator",
  "module": "Ving",
  "name": "Salary Component Variable",
