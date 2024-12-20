@@ -88,7 +88,7 @@ class CustomSalarySlip(SalarySlip):
 		for d in doc.custom_salary_component_variable:
 			if d.salary_component==component_row.salary_component:
 				if d.skip_calculation:
-					omponent_row.amount=0.00
+					component_row.amount=0.00
 				else:
 					if d.type=="Fuel Allowance":
 						component_row.amount=d.variable*self.payment_days
