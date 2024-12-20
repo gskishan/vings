@@ -85,6 +85,11 @@ class CustomSalarySlip(SalarySlip):
 
 			
 		doc=frappe.get_doc("Salary Structure Assignment",self._salary_structure_assignment.name)
+		=0
+		for c in self.earnings:
+			if c.salary_component=="Basic":
+				basic_sal=c.amount
+		frappe.errprint([basic_sal,"basic_sal",len(self.earnings)]
 		for d in doc.custom_salary_component_variable:
 			if d.salary_component==component_row.salary_component:
 				if d.skip_calculation:
@@ -96,9 +101,9 @@ class CustomSalarySlip(SalarySlip):
 						component_row.amount=d.variable*350
 					
 					if d.type=="Loyalty Allowance":
-						component_row.amount= (d.variable / 100) *self._salary_structure_assignment.base
+						component_row.amount= (d.variable / 100) * basic_sal
 					if d.type=="Performance Allowance":
-						component_row.amount= (d.variable / 100) *self._salary_structure_assignment.base
+						component_row.amount= (d.variable / 100) * basic_sal
 					if d.type=="No Leave bonus":
 						if self.total_working_days==self.payment_days:
 							component_row.amount= 500
