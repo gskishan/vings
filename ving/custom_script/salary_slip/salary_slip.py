@@ -99,6 +99,12 @@ class CustomSalarySlip(SalarySlip):
 						component_row.amount= (d.variable / 100) *self._salary_structure_assignment.base
 					if d.type=="Performance Allowance":
 						component_row.amount= (d.variable / 100) *self._salary_structure_assignment.base
+					if d.type=="No Leave bonus":
+						if self.total_working_days==self.payment_days:
+							component_row.amount= 500
+						else:
+							component_row.amount= 0.00
+							
 				
 
 
@@ -109,22 +115,22 @@ class CustomSalarySlip(SalarySlip):
 
 @frappe.whitelist()
 def get_all_variable_component(salary_structure):
-    doc = frappe.get_doc("Salary Structure", salary_structure)
-    
-    components = []
+	doc = frappe.get_doc("Salary Structure", salary_structure)
+	
+	components = []
 
-    for earning in doc.earnings:
-        variable_component, component_type = frappe.db.get_value(
-            "Salary Component", 
-            earning.salary_component, 
-            ["custom_variable_component", "custom_component_type"]
-        )
+	for earning in doc.earnings:
+		variable_component, component_type = frappe.db.get_value(
+			"Salary Component", 
+			earning.salary_component, 
+			["custom_variable_component", "custom_component_type"]
+		)
 
-        if variable_component:
-            components.append({
-                "component": earning.salary_component,
-                "type": component_type
-            })
+		if variable_component:
+			components.append({
+				"component": earning.salary_component,
+				"type": component_type
+			})
 
-    return components
+	return components
 
