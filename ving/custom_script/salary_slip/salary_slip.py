@@ -89,7 +89,6 @@ class CustomSalarySlip(SalarySlip):
 		for c in self.earnings:
 			if c.salary_component=="Basic":
 				basic_sal=c.amount
-		frappe.errprint([basic_sal,"basic_sal",len(self.earnings)])
 		for d in doc.custom_salary_component_variable:
 			if d.salary_component==component_row.salary_component:
 				if d.skip_calculation:
