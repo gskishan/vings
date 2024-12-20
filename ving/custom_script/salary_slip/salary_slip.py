@@ -93,9 +93,9 @@ class CustomSalarySlip(SalarySlip):
 					component_row.amount=d.variable*350
 				
 				if d.type=="Loyalty Allowance":
-					component_row.amount=d.variable*self._salary_structure_assignment.base
+					component_row.amount= (d.variable / 100) *self._salary_structure_assignment.base
 				if d.type=="Performance Allowance":
-					component_row.amount=d.variable*self._salary_structure_assignment.base
+					component_row.amount= (d.variable / 100) *self._salary_structure_assignment.base
 				
 
 
