@@ -34,7 +34,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Type",
-   "options": "\nNight Allowance\nFuel Allowance\nLoyalty Allowance\nPerformance Allowance",
+   "options": "\nNight Allowance\nFuel Allowance\nLoyalty Allowance\nPerformance Allowance\nNo Leave bonus",
    "reqd": 1
   },
   {
