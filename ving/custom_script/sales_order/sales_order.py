@@ -14,8 +14,8 @@ def make_stock_entry(source_name, target_doc=None):
             else 0
         )
         target.qty = qty
-        target.against_sales_order_item = obj.name
-        target.against_sales_order= obj.parent
+        target.custom_against_sales_order_item = obj.name
+        target.custom_against_sales_order = obj.parent
         target.conversion_factor = 1
       
 
