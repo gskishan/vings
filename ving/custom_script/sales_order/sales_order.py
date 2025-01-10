@@ -9,8 +9,8 @@ from frappe.utils import flt
 def make_stock_entry(source_name, target_doc=None):
     def update_item(obj, target, source_parent):
         qty = (
-            flt(obj.qty) - flt(obj.transferred)
-            if flt(obj.qty) > flt(obj.transferred)
+            flt(obj.qty) - flt(obj.custom_transferred)
+            if flt(obj.qty) > flt(obj.custom_transferred)
             else 0
         )
         target.qty = qty
@@ -48,7 +48,7 @@ def make_stock_entry(source_name, target_doc=None):
                 },
                 "postprocess": update_item,
                 "condition": lambda doc: (
-                    flt(doc.transferred, doc.precision("transferred"))
+                    flt(doc.custom_transferred, doc.precision("custom_transferred"))
                     < flt(doc.qty, doc.precision("qty"))
                 ),
             },
