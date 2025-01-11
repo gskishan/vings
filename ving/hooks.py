@@ -32,6 +32,7 @@ doctype_js = {
     "Task" : "custom_script/task/task.js",
     "Timesheet" : "custom_script/timesheet/timesheet.js",
     "Quotation" : "custom_script/quotation/quotation.js",
+    "Stock Entry" : "custom_script/stock_entry/stock_entry.js"
 }
 
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
