@@ -138,6 +138,14 @@ doc_events = {
   "ToDo":{
         "validate":"ving.custom_script.to_do.to_do.validate",
     },
+    "Stock Entry":{
+        "on_submit":"ving.custom_script.stock_entry.stock_entry.on_submit",
+        "on_cancel":"ving.custom_script.stock_entry.stock_entry.on_cancel",
+    },
+    "Payment Entry":{
+        "on_submit":"ving.custom_script.payment_entry.payment_entry.on_submit",
+        "on_cancel":"ving.custom_script.payment_entry.payment_entry.on_cancel",
+    },
     # "Item Price":{
     #     "validate":"ving.custom_script.item_price_list.item_price_list.validate",
     #      "on_trash":"ving.custom_script.item_price_list.item_price_list.on_trash",
