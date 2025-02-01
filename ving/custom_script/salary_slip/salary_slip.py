@@ -26,7 +26,7 @@ class CustomSalarySlip(SalarySlip):
 			for d in self.earnings:
 				if  frappe.db.get_value('Salary Compone', d.salary_component, 'custom_deduct_on_unpaid_leave'):
 					total_amount+=d.amount
-			if total_deduction>0:
+			if total_amount>0:
 				total_deduction=total_amount/self.total_working_days*self.leave_without_pay
 				row=self.append("deductions",{})
 				row.salary_component="Leave W/O Pay"
