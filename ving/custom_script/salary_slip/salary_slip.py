@@ -23,17 +23,15 @@ class CustomSalarySlip(SalarySlip):
 
 	def before_validate(self):
 		self.calculate_deduction_unpaid_leave()
+
 	@frappe.whitelist()
 	def calculate_deduction_unpaid_leave(self):
-		frappe.errprint("1")
 		
 		if self.leave_without_pay > 0:
-			frappe.errprint([self.leave_without_pay, len(self.earnings),"2"])
 			
 			total_amount = 0
 			for d in self.earnings:
 				if frappe.db.get_value('Salary Component', d.salary_component, 'custom_deduct_on_unpaid_leave'):
-					frappe.errprint([self.leave_without_pay, "23"])
 					total_amount += d.amount
 			
 			if total_amount > 0:
@@ -41,7 +39,6 @@ class CustomSalarySlip(SalarySlip):
 				
 				if self.total_working_days > 0:  
 					total_deduction = (total_amount / self.total_working_days) * self.leave_without_pay
-					frappe.errprint([total_deduction, "25"])
 				else:
 					frappe.throw("Total working days cannot be zero.")
 					return
