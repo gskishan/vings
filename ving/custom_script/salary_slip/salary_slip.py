@@ -19,7 +19,7 @@ class CustomSalarySlip(SalarySlip):
 			self.add_earning_for_hourly_wages(self, self._salary_structure_doc.salary_component, wages_amount)
 
 		make_salary_slip(self._salary_structure_doc.name, self)
-		self.calculate_deduction_updaid_leave()
+		self.calculate_deduction_unpaid_leave()
 
 	def before_validate(self):
 		self.calculate_deduction_unpaid_leave()
