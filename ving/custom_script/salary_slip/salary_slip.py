@@ -20,6 +20,9 @@ class CustomSalarySlip(SalarySlip):
 
 		make_salary_slip(self._salary_structure_doc.name, self)
 		self.calculate_deduction_updaid_leave()
+
+	def before_submit(self)
+		self.calculate_deduction_updaid_leave()
 	def calculate_deduction_updaid_leave(self):
 		frappe.errprint("1")
 		if self.leave_without_pay>0:
