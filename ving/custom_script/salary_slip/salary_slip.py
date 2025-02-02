@@ -21,13 +21,18 @@ class CustomSalarySlip(SalarySlip):
 		make_salary_slip(self._salary_structure_doc.name, self)
 		self.calculate_deduction_updaid_leave()
 	def calculate_deduction_updaid_leave(self):
+		frappe.errprint("1")
 		if self.leave_without_pay>0:
+			frappe.errprint([self.leave_without_pay,"2"])
 			total_amount=0
 			for d in self.earnings:
 				if  frappe.db.get_value('Salary Compone', d.salary_component, 'custom_deduct_on_unpaid_leave'):
+					frappe.errprint([self.leave_without_pay,"23"])
 					total_amount+=d.amount
 			if total_amount>0:
+				frappe.errprint([total_amount,"24"])
 				total_deduction=total_amount/self.total_working_days*self.leave_without_pay
+				frappe.errprint([total_deduction,"25"])
 				row=self.append("deductions",{})
 				row.salary_component="Leave W/O Pay"
 				row.amount=total_deduction
