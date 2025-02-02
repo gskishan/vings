@@ -21,13 +21,14 @@ class CustomSalarySlip(SalarySlip):
 		make_salary_slip(self._salary_structure_doc.name, self)
 		self.calculate_deduction_updaid_leave()
 
-	
-	
+	def before_validate(self):
+		self.calculate_deduction_unpaid_leave()
+	@frappe.whitelist()
 	def calculate_deduction_unpaid_leave(self):
 		frappe.errprint("1")
 		
 		if self.leave_without_pay > 0:
-			frappe.errprint([self.leave_without_pay, "2"])
+			frappe.errprint([self.leave_without_pay, len(self.earnings),"2"])
 			
 			total_amount = 0
 			for d in self.earnings:
