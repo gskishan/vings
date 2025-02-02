@@ -35,7 +35,6 @@ class CustomSalarySlip(SalarySlip):
 					total_amount += d.amount
 			
 			if total_amount > 0:
-				frappe.errprint([total_amount, "24"])
 				
 				if self.total_working_days > 0:  
 					total_deduction = (total_amount / self.total_working_days) * self.leave_without_pay
@@ -163,7 +162,7 @@ class CustomSalarySlip(SalarySlip):
 
 		if data:
 			data[component_row.abbr] = component_row.amount
-		self.calculate_deduction_updaid_leave()
+		self.calculate_deduction_unpaid_leave()
 
 
 
