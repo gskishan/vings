@@ -21,24 +21,42 @@ class CustomSalarySlip(SalarySlip):
 		make_salary_slip(self._salary_structure_doc.name, self)
 		self.calculate_deduction_updaid_leave()
 
-	def before_submit(self)
-		self.calculate_deduction_updaid_leave()
-	def calculate_deduction_updaid_leave(self):
+	
+	
+	def calculate_deduction_unpaid_leave(self):
 		frappe.errprint("1")
-		if self.leave_without_pay>0:
-			frappe.errprint([self.leave_without_pay,"2"])
-			total_amount=0
+		
+		if self.leave_without_pay > 0:
+			frappe.errprint([self.leave_without_pay, "2"])
+			
+			total_amount = 0
 			for d in self.earnings:
-				if  frappe.db.get_value('Salary Compone', d.salary_component, 'custom_deduct_on_unpaid_leave'):
-					frappe.errprint([self.leave_without_pay,"23"])
-					total_amount+=d.amount
-			if total_amount>0:
-				frappe.errprint([total_amount,"24"])
-				total_deduction=total_amount/self.total_working_days*self.leave_without_pay
-				frappe.errprint([total_deduction,"25"])
-				row=self.append("deductions",{})
-				row.salary_component="Leave W/O Pay"
-				row.amount=total_deduction
+				if frappe.db.get_value('Salary Component', d.salary_component, 'custom_deduct_on_unpaid_leave'):
+					frappe.errprint([self.leave_without_pay, "23"])
+					total_amount += d.amount
+			
+			if total_amount > 0:
+				frappe.errprint([total_amount, "24"])
+				
+				if self.total_working_days > 0:  
+					total_deduction = (total_amount / self.total_working_days) * self.leave_without_pay
+					frappe.errprint([total_deduction, "25"])
+				else:
+					frappe.throw("Total working days cannot be zero.")
+					return
+				
+				found = False
+				for d in self.deductions:
+					if d.salary_component == "Leave W/O Pay":
+						d.amount = total_deduction
+						found = True
+						break
+				
+				if not found:
+					row = self.append("deductions", {})
+					row.salary_component = "Leave W/O Pay"
+					row.amount = total_deduction
+
 	def update_component_row(
 		self,
 		component_data,
@@ -147,6 +165,7 @@ class CustomSalarySlip(SalarySlip):
 
 		if data:
 			data[component_row.abbr] = component_row.amount
+		self.calculate_deduction_updaid_leave()
 
 
 
