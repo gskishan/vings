@@ -135,6 +135,7 @@ class CustomSalarySlip(SalarySlip):
 			if d.get("status")=="Present":
 				count+=1
 		frappe.errprint(["count",count])
+		self.set("custom_worked_on_holiday",count)
 
 	@frappe.whitelist()
 	def calculate_deduction_unpaid_leave(self):
