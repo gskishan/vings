@@ -15,6 +15,7 @@ from frappe.utils import (
 	flt,
 	getdate,
 )
+from hrms.hr.doctype.leave_application.leave_application import get_leave_details
 
 import erpnext
 from ving.ving.report.employees_working_on_a_holiday_with_employee_filters.employees_working_on_a_holiday_with_employee_filters import execute as work_on_holidays
@@ -134,7 +135,6 @@ class CustomSalarySlip(SalarySlip):
 		for d in result:
 			if d.get("status")=="Present":
 				count+=1
-		frappe.errprint(["count",count])
 		self.set("custom_worked_on_holiday",count)
 
 	@frappe.whitelist()
@@ -256,7 +256,14 @@ class CustomSalarySlip(SalarySlip):
 					component_row.amount=0.00
 				else:
 					if d.type=="Fuel Allowance":
-						component_row.amount=d.variable*self.payment_days
+						holidays = self.get_holidays_for_employee(self.start_date, self.end_date)
+						data = get_leave_details(self.employee, self.end_date)
+						total_leaves_taken = sum(leave.get("leaves_taken", 0) for leave in data["leave_allocation"].values())
+
+
+						no_of_holiday=flt(len(holidays))
+
+						component_row.amount=d.variable*(self.payment_days-no_of_holiday-total_leaves_taken-self.leave_without_pay+self.custom_worked_on_holiday)
 					if d.type=="Night Allowance":
 						component_row.amount=d.variable*350
 					
@@ -269,6 +276,20 @@ class CustomSalarySlip(SalarySlip):
 							component_row.amount= 500
 						else:
 							component_row.amount= 0.00
+					if d.type=="Work on Holidays":
+						if self.custom_worked_on_holiday:
+							ttl=0
+							for d in self.earnings:
+								if d.type in ["Basic","House Rent Allowance","B & L Allowance","Dearness Allowance","Wheat Allowance"]:
+									ttl+d.amount
+							leave_appplication=get_leave_details(self.employee,self.end_date)
+							leaves_taken = leave_appplication["leave_allocation"].get("Casual Leave", {}).get("leaves_taken", 0)
+
+							
+							component_row.amount=ttl/self.total_working_days*(self.custom_worked_on_holiday+1-leaves_taken)
+						else:
+							component_row.amount= 0.00
+					
 							
 				
 
