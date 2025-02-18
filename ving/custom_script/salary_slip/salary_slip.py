@@ -56,9 +56,6 @@ class CustomSalarySlip(SalarySlip):
 	def calculate_net_pay(self, skip_tax_breakup_computation: bool = False):
 		def set_gross_pay_and_base_gross_pay():
 			self.gross_pay = self.get_component_totals("earnings", depends_on_payment_days=1)
-			frappe.errprint(self.gross_pay)
-			for d in self.earnings:
-				frappe.errprint([d.idx,d.amount,"me"])
 			self.base_gross_pay = flt(
 				flt(self.gross_pay) * flt(self.exchange_rate), self.precision("base_gross_pay")
 			)
@@ -214,10 +211,9 @@ class CustomSalarySlip(SalarySlip):
 			if not d.do_not_include_in_total:
 				if depends_on_payment_days:
 					amount = self.get_amount_based_on_payment_days(d)[0]
-					frappe.errprint([amount,d.idx,"if"])
 				else:
 					amount = flt(d.amount, d.precision("amount"))
-					frappe.errprint([amount,d.idx,"else"])
+					
 
 				total += amount
 		return total
