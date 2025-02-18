@@ -35,9 +35,13 @@ class CustomSalarySlip(SalarySlip):
 
 		make_salary_slip(self._salary_structure_doc.name, self)
 		self.calculate_deduction_unpaid_leave()
+		self.calculate_net_pay()
+
 
 	def before_validate(self):
 		self.calculate_deduction_unpaid_leave()
+		self.calculate_net_pay()
+
 
 	def get_working_days_details(self, lwp=None, for_preview=0):
 		payroll_settings = frappe.get_cached_value(
