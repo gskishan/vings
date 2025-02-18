@@ -208,6 +208,20 @@ class CustomSalarySlip(SalarySlip):
 				count+=1
 		self.set("custom_worked_on_holiday",count)
 
+	def get_component_totals(self, component_type, depends_on_payment_days=0):
+		total = 0.0
+		for d in self.get(component_type):
+			if not d.do_not_include_in_total:
+				if depends_on_payment_days:
+					amount = self.get_amount_based_on_payment_days(d)[0]
+					frappe.errprint([amount,d.idx,"if"])
+				else:
+					amount = flt(d.amount, d.precision("amount"))
+					frappe.errprint([amount,d.idx,"else"])
+
+				total += amount
+		return total
+
 	@frappe.whitelist()
 	def calculate_deduction_unpaid_leave(self):
 		
