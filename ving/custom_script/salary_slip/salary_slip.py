@@ -331,6 +331,15 @@ class CustomSalarySlip(SalarySlip):
 		for c in self.earnings:
 			if c.salary_component=="Basic":
 				basic_sal=c.amount
+		frappe.errprint(component_row.salary_component)
+		if component_row.salary_component=="Leave W/O Pay":
+			gross_p=0
+			for p in self.earnings:
+				gross_p+=p.amount
+			leav_wo=(gross_p/self.total_working_days)*2.5
+			component_row.amount=leav_wo
+			
+
 		for d in doc.custom_salary_component_variable:
 			if d.salary_component==component_row.salary_component:
 				if d.skip_calculation:
