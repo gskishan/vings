@@ -57,7 +57,7 @@ class CustomSalarySlip(SalarySlip):
 		def set_gross_pay_and_base_gross_pay():
 			self.gross_pay = self.get_component_totals("earnings", depends_on_payment_days=1)
 			frappe.errprint(self.gross_pay)
-			for d in self.earning:
+			for d in self.earnings:
 				frappe.errprint([d.idx,d.amount,"me"])
 			self.base_gross_pay = flt(
 				flt(self.gross_pay) * flt(self.exchange_rate), self.precision("base_gross_pay")
