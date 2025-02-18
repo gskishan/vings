@@ -13,8 +13,18 @@ from frappe.utils import (
 	cint,
 	date_diff,
 	flt,
+
 	getdate,
+	rounded,
 )
+from hrms.payroll.doctype.payroll_period.payroll_period import (
+	get_period_factor,
+)
+from hrms.payroll.doctype.salary_slip.salary_slip_loan_utils import (
+	
+	set_loan_repayment,
+)
+
 from hrms.hr.doctype.leave_application.leave_application import get_leave_details
 
 import erpnext
@@ -41,6 +51,63 @@ class CustomSalarySlip(SalarySlip):
 	def before_validate(self):
 		self.calculate_deduction_unpaid_leave()
 		self.calculate_net_pay()
+
+	@frappe.whitelist()
+	def calculate_net_pay(self, skip_tax_breakup_computation: bool = False):
+		def set_gross_pay_and_base_gross_pay():
+			self.gross_pay = self.get_component_totals("earnings", depends_on_payment_days=1)
+			frappe.errprint(self.gross_pay)
+			for d in self.earning:
+				frappe.errprint([d.idx,d.amount,"me"])
+			self.base_gross_pay = flt(
+				flt(self.gross_pay) * flt(self.exchange_rate), self.precision("base_gross_pay")
+			)
+
+		if self.salary_structure:
+			self.calculate_component_amounts("earnings")
+
+		# get remaining numbers of sub-period (period for which one salary is processed)
+		if self.payroll_period:
+			self.remaining_sub_periods = get_period_factor(
+				self.employee,
+				self.start_date,
+				self.end_date,
+				self.payroll_frequency,
+				self.payroll_period,
+				joining_date=self.joining_date,
+				relieving_date=self.relieving_date,
+			)[1]
+
+		set_gross_pay_and_base_gross_pay()
+
+		if self.salary_structure:
+			self.calculate_component_amounts("deductions")
+
+		set_loan_repayment(self)
+
+		self.set_precision_for_component_amounts()
+		self.set_net_pay()
+		if not skip_tax_breakup_computation:
+			self.compute_income_tax_breakup()
+
+	def set_net_pay(self):
+		self.total_deduction = self.get_component_totals("deductions")
+		self.base_total_deduction = flt(
+			flt(self.total_deduction) * flt(self.exchange_rate), self.precision("base_total_deduction")
+		)
+		self.net_pay = flt(self.gross_pay) - (
+			flt(self.total_deduction) + flt(self.get("total_loan_repayment"))
+		)
+		self.rounded_total = rounded(self.net_pay)
+		self.base_net_pay = flt(flt(self.net_pay) * flt(self.exchange_rate), self.precision("base_net_pay"))
+		self.base_rounded_total = flt(rounded(self.base_net_pay), self.precision("base_net_pay"))
+		if self.hour_rate:
+			self.base_hour_rate = flt(
+				flt(self.hour_rate) * flt(self.exchange_rate), self.precision("base_hour_rate")
+			)
+		self.set_net_total_in_words()
+
+
 
 
 	def get_working_days_details(self, lwp=None, for_preview=0):
