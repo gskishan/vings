@@ -231,7 +231,13 @@ class CustomSalarySlip(SalarySlip):
 			if total_amount > 0:
 				
 				if self.total_working_days and self.total_working_days > 0:  
-					total_deduction = (total_amount / self.total_working_days) * self.leave_without_pay
+					total_amount = total_amount or 0
+					total_working_days = self.total_working_days 
+					absent_days = self.absent_days or 0
+					leave_without_pay = self.leave_without_pay or 0
+
+					total_deduction = (total_amount / total_working_days) * (absent_days - leave_without_pay)
+
 				else:
 					frappe.throw("Total working days cannot be zero.")
 					return
@@ -331,13 +337,7 @@ class CustomSalarySlip(SalarySlip):
 		for c in self.earnings:
 			if c.salary_component=="Basic":
 				basic_sal=c.amount
-		frappe.errprint(component_row.salary_component)
-		if component_row.salary_component=="Leave W/O Pay":
-			gross_p=0
-			for p in self.earnings:
-				gross_p+=p.amount
-			leav_wo=(gross_p/self.total_working_days)*2.5
-			component_row.amount=leav_wo
+
 			
 
 		for d in doc.custom_salary_component_variable:
