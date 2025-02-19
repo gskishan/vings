@@ -221,7 +221,7 @@ class CustomSalarySlip(SalarySlip):
 	@frappe.whitelist()
 	def calculate_deduction_unpaid_leave(self):
 		
-		if self.leave_without_pay and self.leave_without_pay > 0:
+		if (self.leave_without_pay and self.leave_without_pay > 0) or (self.absent_days and self.absent_days>0):
 			
 			total_amount = 0
 			for d in self.earnings:
