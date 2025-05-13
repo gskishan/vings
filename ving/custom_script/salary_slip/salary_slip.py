@@ -198,12 +198,12 @@ class CustomSalarySlip(SalarySlip):
 		}
 		filters = frappe._dict(filters)
 		
-		result = work_on_holidays(filters)[0]
+		result = work_on_holidays(filters)
+		frappe.errprint([result,count,filters,"work on"])
 		count=0
 		for d in result:
 			if d.get("status")=="Present":
 				count+=1
-		frappe.errprint([result,count,filters,"work on"])
 		self.set("custom_worked_on_holiday",count)
 
 	def get_component_totals(self, component_type, depends_on_payment_days=0):
