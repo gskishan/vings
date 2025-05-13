@@ -351,7 +351,7 @@ class CustomSalarySlip(SalarySlip):
 
 
 						no_of_holiday=flt(len(holidays))
-						frappe.errprint([self.total_working_days,no_of_holiday,total_leaves_taken,self.leave_without_pay,self.absent_days,self.custom_worked_on_holiday])
+						# frappe.errprint([self.total_working_days,no_of_holiday,total_leaves_taken,self.leave_without_pay,self.absent_days,self.custom_worked_on_holiday])
 						component_row.amount=d.variable*(self.total_working_days-no_of_holiday-total_leaves_taken-self.leave_without_pay-self.absent_days+self.custom_worked_on_holiday)
 					if d.type=="Night Allowance":
 						component_row.amount=d.variable*350
