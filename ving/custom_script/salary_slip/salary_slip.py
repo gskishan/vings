@@ -203,7 +203,7 @@ class CustomSalarySlip(SalarySlip):
 		for d in result:
 			if d.get("status")=="Present":
 				count+=1
-		frappe.errprint([result,count,filters,"work on"])
+		
 		self.set("custom_worked_on_holiday",count)
 
 	def get_component_totals(self, component_type, depends_on_payment_days=0):
@@ -349,13 +349,29 @@ class CustomSalarySlip(SalarySlip):
 					component_row.amount=0.00
 				else:
 					if d.type=="Fuel Allowance":
+						filters = {
+							"company": self.get("company"),
+							"employee": self.get("employee"),
+							"from_date": self.get("start_date"),
+							"to_date": self.get("end_date"),
+						}
+						filters = frappe._dict(filters)
+						
+						result = work_on_holidays(filters)[1]
+						count=0
+						for d in result:
+							if d.get("status")=="Present":
+								count+=1
+						work_on_holid=count
+						frappe.errprint(["workon",work_on_holid])
+										
 						holidays = self.get_holidays_for_employee(self.start_date, self.end_date)
 						data = get_leave_details(self.employee, self.end_date)
 						total_leaves_taken = sum(leave.get("leaves_taken", 0) for leave in data["leave_allocation"].values())
 
 
 						no_of_holiday=flt(len(holidays))
-						component_row.amount=d.variable*(self.total_working_days-no_of_holiday-total_leaves_taken-self.leave_without_pay-self.absent_days)
+						component_row.amount=d.variable*(self.total_working_days-no_of_holiday-total_leaves_taken-self.leave_without_pay-self.absent_days+total_leaves_taken)
 					if d.type=="Night Allowance":
 						component_row.amount=d.variable*350
 					
