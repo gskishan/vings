@@ -359,11 +359,11 @@ class CustomSalarySlip(SalarySlip):
 						
 						result = work_on_holidays(filters)[1]
 						count=0
+						frappe.errprint(["workon",result])
 						for d in result:
 							if d.get("status")=="Present":
 								count+=1
 						work_on_holid=count
-						frappe.errprint(["workon",work_on_holid])
 										
 						holidays = self.get_holidays_for_employee(self.start_date, self.end_date)
 						data = get_leave_details(self.employee, self.end_date)
