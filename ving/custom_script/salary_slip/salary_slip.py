@@ -199,8 +199,8 @@ class CustomSalarySlip(SalarySlip):
 		filters = frappe._dict(filters)
 		
 		result = work_on_holidays(filters)
-		frappe.errprint([result,count,filters,"work on"])
 		count=0
+		frappe.errprint([result,count,filters,"work on"])
 		for d in result:
 			if d.get("status")=="Present":
 				count+=1
