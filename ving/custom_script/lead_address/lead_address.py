@@ -18,8 +18,8 @@ def create_lead_address(doc, method):
             "address_type": "Billing",
             "address_line1": doc.get("custom_address_line1") or "",
             "address_line2": doc.get("custom_address_line2") or "",
-            "city": doc.get("custom_city1") or "",
-            "state": doc.get("custom_state1") or "",
+            "city": doc.get("city") or "",
+            "state": doc.get("state") or "",
             "pincode": doc.get("custom_postal_code") or "",
             "links": [{
                 "link_doctype": "Lead",
