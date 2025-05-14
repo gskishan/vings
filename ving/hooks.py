@@ -141,7 +141,7 @@ doc_events = {
     },
     "Lead": {
         "after_insert": "ving.custom_script.lead_address.lead_address.create_lead_address",
-    }
+    },
     "Stock Entry":{
         "on_submit":"ving.custom_script.stock_entry.stock_entry.on_submit",
         "on_cancel":"ving.custom_script.stock_entry.stock_entry.on_cancel",
