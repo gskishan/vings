@@ -1,3 +1,4 @@
+
 import frappe
 from frappe import _
 from hrms.payroll.doctype.salary_slip.salary_slip import SalarySlip
@@ -370,7 +371,7 @@ class CustomSalarySlip(SalarySlip):
 							ttl=0
 							for e in self.earnings:
 								if e.salary_component in ["Basic","House Rent Allowance","B & L Allowance","Dearness Allowance","Wheat Allowance"]:
-									ttl+=de.amount
+									ttl+=e.amount
 							for de in self.deductions:
 								if de.salary_component =='ESI':
 									ttl+=de.amount
