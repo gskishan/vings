@@ -369,10 +369,10 @@ class CustomSalarySlip(SalarySlip):
 						if self.custom_worked_on_holiday:
 							ttl=0
 							for e in self.earnings:
-								if e.type in ["Basic","House Rent Allowance","B & L Allowance","Dearness Allowance","Wheat Allowance"]:
+								if e.salary_component in ["Basic","House Rent Allowance","B & L Allowance","Dearness Allowance","Wheat Allowance"]:
 									ttl+=de.amount
 							for de in self.deductions:
-								if de.type =='ESI':
+								if de.salary_component =='ESI':
 									ttl+=de.amount
 							leave_appplication=get_leave_details(self.employee,self.end_date)
 							leaves_taken = leave_appplication["leave_allocation"].get("Casual Leave", {}).get("leaves_taken", 0)
