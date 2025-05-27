@@ -345,7 +345,6 @@ class CustomSalarySlip(SalarySlip):
 				if d.skip_calculation:
 					component_row.amount=0.00
 				else:
-					if not self.custom_allow_edit:
 						if d.type=="Fuel Allowance":
 							holidays = self.get_holidays_for_employee(self.start_date, self.end_date)
 							data = get_leave_details(self.employee, self.end_date)
