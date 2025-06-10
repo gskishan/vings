@@ -380,9 +380,9 @@ class CustomSalarySlip(SalarySlip):
 								for e in self.earnings:
 									if e.salary_component in ["Basic","House Rent Allowance","B & L Allowance","Dearness Allowance","Wheat Allowance"]:
 										ttl+=e.amount
-								for de in self.deductions:
-									if de.salary_component =='ESI':
-										ttl+=de.amount
+								# for de in self.deductions:
+								# 	if de.salary_component =='ESI':
+								# 		ttl+=de.amount
 								component_row.amount=ttl/self.total_working_days
 							else:
 								component_row.amount= 0.00
