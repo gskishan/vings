@@ -361,8 +361,16 @@ class CustomSalarySlip(SalarySlip):
 							component_row.amount= (d.variable / 100) * basic_sal
 						if d.type=="Performance Allowance":
 							component_row.amount= (d.variable / 100) * basic_sal
+						leave_data = get_leave_details(self.employee, self.end_date)
+						leave_allocation = leave_data.get("leave_allocation", {})
+
+						total_leaves_taken = 0
+						for leave_type, details in leave_allocation.items():
+							total_leaves_taken += details.get("leaves_taken", 0)
 						if d.type=="No Leave bonus":
-							if self.total_working_days==self.payment_days:
+
+							
+							if total_leaves_taken>0:
 								component_row.amount= 500
 							else:
 								component_row.amount= 0.00
