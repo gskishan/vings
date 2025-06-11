@@ -369,7 +369,7 @@ class CustomSalarySlip(SalarySlip):
 							total_leaves_taken += details.get("leaves_taken", 0)
 						if d.type=="No Leave bonus":
 
-							frappe.errprint([leave_data,"leave_data"])
+							frappe.errprint([leave_data,"leave_data",total_leaves_taken])
 							if total_leaves_taken==0:
 								component_row.amount= 500
 							else:
