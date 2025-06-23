@@ -368,12 +368,12 @@ class CustomSalarySlip(SalarySlip):
 						for leave_type, details in leave_allocation.items():
 							total_leaves_taken += details.get("leaves_taken", 0)
 						if d.type=="No Leave bonus":
-							if total_leaves_taken==0:
+							if total_leaves_taken==0 and self.absent_days==0:
 								component_row.amount= 500
 							else:
 								component_row.amount= 0.00
 						if d.type=="One day extra payment":
-							if total_leaves_taken==0:
+							if total_leaves_taken==0 and self.absent_days==0:
 								ttl=0
 								for e in self.earnings:
 									if e.salary_component in ["Basic","House Rent Allowance","B & L Allowance","Dearness Allowance","Wheat Allowance"]:
