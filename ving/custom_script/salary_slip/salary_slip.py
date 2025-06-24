@@ -50,9 +50,9 @@ class CustomSalarySlip(SalarySlip):
 
 
 	def before_validate(self):
-		self.set_totals()
 		self.calculate_deduction_unpaid_leave()
 		self.calculate_net_pay()
+		self.set_totals()
 
 	@frappe.whitelist()
 	def calculate_net_pay(self, skip_tax_breakup_computation: bool = False):
@@ -410,6 +410,8 @@ class CustomSalarySlip(SalarySlip):
 		if data:
 			data[component_row.abbr] = component_row.amount
 		self.calculate_deduction_unpaid_leave()
+		self.set_totals()
+		
 
 
 
