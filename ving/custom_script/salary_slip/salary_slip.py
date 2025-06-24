@@ -50,6 +50,7 @@ class CustomSalarySlip(SalarySlip):
 
 
 	def before_validate(self):
+		self.set_totals()
 		self.calculate_deduction_unpaid_leave()
 		self.calculate_net_pay()
 
