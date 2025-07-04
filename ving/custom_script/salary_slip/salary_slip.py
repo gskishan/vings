@@ -203,6 +203,7 @@ class CustomSalarySlip(SalarySlip):
 		result = work_on_holidays(filters)[1]
 
 		worked_count = 0
+		frappe.errprint([result,"res])
 		for row in result:
 			status = row.get("status")
 			if status == "Present":
