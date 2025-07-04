@@ -359,12 +359,12 @@ class CustomSalarySlip(SalarySlip):
 							holidays = self.get_holidays_for_employee(self.start_date, self.end_date)
 							data = get_leave_details(self.employee, self.end_date)
 							total_leaves_taken = sum(leave.get("leaves_taken", 0) for leave in data["leave_allocation"].values())
-							datas=get_employee_monthly_attendance_summary_by_date(self.employee,self.company,str(self.end_date))
-							frappe.errprint(datas)
+							attend=get_employee_monthly_attendance_summary_by_date(self.employee,self.company,str(self.end_date))
+
 
 							no_of_holiday=flt(len(holidays))
-							frappe.errprint([self.total_working_days,no_of_holiday,total_leaves_taken,self.leave_without_pay,self.absent_days,self.custom_worked_on_holiday])
-							component_row.amount=d.variable*(self.total_working_days-no_of_holiday-total_leaves_taken-self.leave_without_pay-self.absent_days+self.custom_worked_on_holiday)
+							
+							component_row.amount=d.variable*(attend.get("total_present"))
 						if d.type=="Night Allowance":
 							component_row.amount=d.variable*350
 						
