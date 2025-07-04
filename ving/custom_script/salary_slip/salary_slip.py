@@ -193,19 +193,18 @@ class CustomSalarySlip(SalarySlip):
 		else:
 			self.payment_days = 0
 		filters = {
-			"company": self.get("company"),
-			"employee": self.get("employee"),
-			"from_date": self.get("start_date"),
-			"to_date": self.get("end_date"),
+		"company": self.get("company"),
+		"employee": self.get("employee"),
+		"from_date": self.get("start_date"),
+		"to_date": self.get("end_date"),
 		}
 		filters = frappe._dict(filters)
 
 		result = work_on_holidays(filters)[1]
 
 		worked_count = 0
-		frappe.errprint([result,"res"])
 		for row in result:
-			status = row.get("status")
+			status = row[3] 
 			if status == "Present":
 				worked_count += 1
 			elif status == "Half Day":
@@ -430,50 +429,50 @@ from datetime import datetime
 
 @frappe.whitelist()
 def get_employee_monthly_attendance_summary_by_date(employee, company, date_str):
-    if not employee or not company or not date_str:
-        frappe.throw("Employee, Company, and Date are required")
+	if not employee or not company or not date_str:
+		frappe.throw("Employee, Company, and Date are required")
 
-    try:
-        # Convert string to date object
-        date_obj = datetime.strptime(date_str, "%Y-%m-%d")
-        month = str(date_obj.month)
-        year = str(date_obj.year)
-    except Exception:
-        frappe.throw("Invalid date format. Use YYYY-MM-DD")
+	try:
+		# Convert string to date object
+		date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+		month = str(date_obj.month)
+		year = str(date_obj.year)
+	except Exception:
+		frappe.throw("Invalid date format. Use YYYY-MM-DD")
 
-    filters = {
-        "month": month,
-        "year": year,
-        "employee": employee,
-        "company": company,
-        "include_company_descendants": 1,
-        "summarized_view": 1
-    }
+	filters = {
+		"month": month,
+		"year": year,
+		"employee": employee,
+		"company": company,
+		"include_company_descendants": 1,
+		"summarized_view": 1
+	}
 
-    data = attendence_details(filters)[1]
-    if not data:
-        return {}
+	data = attendence_details(filters)[1]
+	if not data:
+		return {}
 
-    row = data[0]
-    return {
-        "employee": row.get("employee"),
-        "employee_name": row.get("employee_name"),
-        "total_present": row.get("total_present", 0),
-        "total_leaves": row.get("total_leaves", 0),
-        "total_absent": row.get("total_absent", 0),
-        "total_holidays": row.get("total_holidays", 0),
-        "unmarked_days": row.get("unmarked_days", 0),
-        "paid_leave": row.get("paid_leave", 0),
-        "sick_leave": row.get("sick_leave", 0),
-        "casual_leave": row.get("casual_leave", 0),
-        "gift_leave": row.get("gift_leave", 0),
-        "privilege_leave": row.get("privilege_leave", 0),
-        "compensatory_off": row.get("compensatory_off", 0),
-        "without_leave_pay": row.get("without_leave_pay", 0),
-        "leave_without_pay": row.get("leave_without_pay", 0),
-        "total_late_entries": row.get("total_late_entries", 0),
-        "total_early_exits": row.get("total_early_exits", 0),
-    }
+	row = data[0]
+	return {
+		"employee": row.get("employee"),
+		"employee_name": row.get("employee_name"),
+		"total_present": row.get("total_present", 0),
+		"total_leaves": row.get("total_leaves", 0),
+		"total_absent": row.get("total_absent", 0),
+		"total_holidays": row.get("total_holidays", 0),
+		"unmarked_days": row.get("unmarked_days", 0),
+		"paid_leave": row.get("paid_leave", 0),
+		"sick_leave": row.get("sick_leave", 0),
+		"casual_leave": row.get("casual_leave", 0),
+		"gift_leave": row.get("gift_leave", 0),
+		"privilege_leave": row.get("privilege_leave", 0),
+		"compensatory_off": row.get("compensatory_off", 0),
+		"without_leave_pay": row.get("without_leave_pay", 0),
+		"leave_without_pay": row.get("leave_without_pay", 0),
+		"total_late_entries": row.get("total_late_entries", 0),
+		"total_early_exits": row.get("total_early_exits", 0),
+	}
 
 @frappe.whitelist()
 def get_all_variable_component(salary_structure):
