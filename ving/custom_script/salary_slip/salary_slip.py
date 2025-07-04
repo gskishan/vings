@@ -449,7 +449,7 @@ def get_employee_monthly_attendance_summary_by_date(employee, company, date_str)
         "summarized_view": 1
     }
 
-    columns, data = attendence_details(filters)
+    data = attendence_details(filters)[1]
     if not data:
         return {}
 
