@@ -246,7 +246,6 @@ class CustomSalarySlip(SalarySlip):
 					
 
 					total_deduction = (total_amount / total_working_days) * (absent_days + leave_without_pay)
-					frappe.errprint([total_amount,elf.total_working_days,self.absent_days,self.leave_without_pay])
 					
 
 				else:
