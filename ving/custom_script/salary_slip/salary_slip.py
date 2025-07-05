@@ -243,9 +243,9 @@ class CustomSalarySlip(SalarySlip):
 					total_working_days = self.total_working_days 
 					absent_days = self.absent_days or 0
 					leave_without_pay = self.leave_without_pay or 0
-					
+					attend_details=get_employee_monthly_attendance_summary_by_date(self.employee,self.company,str(self.end_date))
 
-					total_deduction = (total_amount / total_working_days) * (absent_days + leave_without_pay)
+					total_deduction = (total_amount / total_working_days) * (absent_days+attend_details.get("unmarked_days") + leave_without_pay)
 					
 
 				else:
@@ -356,13 +356,13 @@ class CustomSalarySlip(SalarySlip):
 					component_row.amount=0.00
 				else:
 						if d.type=="Fuel Allowance":
-							holidays = self.get_holidays_for_employee(self.start_date, self.end_date)
+							# holidays = self.get_holidays_for_employee(self.start_date, self.end_date)
 							data = get_leave_details(self.employee, self.end_date)
 							total_leaves_taken = sum(leave.get("leaves_taken", 0) for leave in data["leave_allocation"].values())
 							attend=get_employee_monthly_attendance_summary_by_date(self.employee,self.company,str(self.end_date))
 
 
-							no_of_holiday=flt(len(holidays))
+							# no_of_holiday=flt(len(holidays))
 							
 							component_row.amount=d.variable*(attend.get("total_present"))
 						if d.type=="Night Allowance":
